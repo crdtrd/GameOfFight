@@ -22,7 +22,7 @@ public:
 	string getName() const;
 
 	void setDescription(string description);
-	string getName() const;
+	string getDescription() const;
 
 	void setWorth(int worth);
 	int getWorth() const;
