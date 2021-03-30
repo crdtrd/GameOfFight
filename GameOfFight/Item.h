@@ -9,12 +9,12 @@ using namespace std;
 
 class Item
 {
-private:
+protected:
 	string name;
 	string description;
 	int worth;
 
-protected:
+public:
 	Item();
 	Item(string name, string description, int worth);
 
