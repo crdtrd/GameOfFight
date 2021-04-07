@@ -2,12 +2,12 @@
 
 Item::Item()
 {
-	name = ""; description = ""; worth = 0;
+	name = ""; worth = 0;
 }
 
-Item::Item(string name, string description, int worth)
+Item::Item(string name, int worth)
 {
-	this->name = name; this->description = description; this->worth = worth;
+	this->name = name; this->worth = worth;
 }
 
 void Item::setName(string name)
@@ -18,16 +18,6 @@ void Item::setName(string name)
 string Item::getName() const
 {
 	return name;
-}
-
-void Item::setDescription(string description)
-{
-	this->description = description;
-}
-
-string Item::getDescription() const
-{
-	return description;
 }
 
 void Item::setWorth(int worth)

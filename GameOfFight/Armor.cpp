@@ -5,8 +5,8 @@ Armor::Armor()
 	defense = 0;
 }
 
-Armor::Armor(string name, string description, int worth, int defense)
-	:Item(name, description, worth)
+Armor::Armor(string name, int worth, int defense)
+	:Item(name, worth)
 {
 	this->defense = defense;
 }

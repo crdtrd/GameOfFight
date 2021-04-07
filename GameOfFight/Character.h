@@ -11,7 +11,6 @@ class Character
 protected:
 	string name;
 	string title; // Player: fighter, assassin, tank. Enemy: anything I want
-	int powerLevel;
 	int health;
 	int maxHealth;
 	int damage;
@@ -31,9 +30,6 @@ public:
 	void setTitle(string title);
 	string getTitle() const;
 
-	void updatePowerLevel();
-	int getPowerLevel() const;
-
 	void setHealth(int health);
 	void heal(int healAmount);
 	int getHealth() const;
@@ -46,8 +42,8 @@ public:
 
 	void addItem(Item*);
 
-	int getDamage();
-	int getDefense();
+	int getDamage() const;
+	int getDefense() const;
 	void takeDamage();
 
 	virtual void updateDamage() = 0;

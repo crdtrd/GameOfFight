@@ -12,7 +12,7 @@ private:
 
 public:
 	Weapon();
-	Weapon(string name, string description, int worth, int damage);
+	Weapon(string name, int worth, int damage);
 
 	void setDamage(int damage);
 	int getDamage() const;

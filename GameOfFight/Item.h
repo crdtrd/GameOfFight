@@ -11,18 +11,14 @@ class Item
 {
 protected:
 	string name;
-	string description;
 	int worth;
 
 public:
 	Item();
-	Item(string name, string description, int worth);
+	Item(string name, int worth);
 
 	void setName(string name);
 	string getName() const;
-
-	void setDescription(string description);
-	string getDescription() const;
 
 	void setWorth(int worth);
 	int getWorth() const;

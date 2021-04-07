@@ -2,11 +2,13 @@
 
 Weapon::Weapon()
 {
-	damage = 0;
+	name = "Fist";
+	worth = 0;
+	damage = 10;
 }
 
-Weapon::Weapon(string name, string description, int worth, int damage)
-	: Item(name, description, worth)
+Weapon::Weapon(string name, int worth, int damage)
+	: Item(name, worth)
 {
 	this->damage = damage;
 }

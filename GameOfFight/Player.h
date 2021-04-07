@@ -10,9 +10,9 @@ class Player : public Character
 private:
 	int titleDmgMod; // damage modifier from player character title
 	int titleDefMod; // defense modifier from player character title
-	
-	// Historic variables for stats that are built up between saves.
-	// When there is a save, these are added to stored values and then reset.
+	int powerLevel;
+	int currentTopDamage;
+	int currentTopDefense;
 	int victories;
 	int defeats;
 	int damageDealt;
@@ -24,6 +24,9 @@ public:
 
 	void updateDamage();
 	void updateDefense();
+
+	void updatePowerLevel();
+	int getPowerLevel() const;
 
 	int getWallet() const;
 	void payMoney(int money);

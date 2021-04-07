@@ -12,7 +12,7 @@ private:
 
 public:
 	Armor();
-	Armor(string name, string description, int worth, int defense);
+	Armor(string name, int worth, int defense);
 
 	void setDefense(int defense);
 	int getDefense() const;
