@@ -15,18 +15,30 @@ private:
 	int currentTopDefense;
 	int victories;
 	int defeats;
+
+	/* extra stats im not worrying about right now
 	int damageDealt;
 	int damageRecieved;
+	*/
 
 public:
 	Player();
 	Player(string name, string title);
+
+	void setTitleDmgMod(int mod);
+	int getTitleDmgMod() const;
+
+	void setTitleDefMod(int mod);
+	int getTitleDefMod() const;
 
 	void updateDamage();
 	void updateDefense();
 
 	void updatePowerLevel();
 	int getPowerLevel() const;
+
+	void updateCurrentTopDamage();
+	void updateCurrentTopDefense();
 
 	int getWallet() const;
 	void payMoney(int money);

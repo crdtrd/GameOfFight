@@ -1,11 +1,10 @@
 #include <fstream>
-#include "Weapon.h"
-#include "Armor.h"
+#include <iostream>
 
-using namespace std;
+#include "Game.h"
+
 int main() {
-
-
+	Game g;
+	g.play();
 	return 0;
-
 }

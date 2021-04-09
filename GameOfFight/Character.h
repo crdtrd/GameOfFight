@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Item.h"
+#include "Weapon.h"
+#include "Armor.h"
 #include <vector>
 
 #ifndef CHARACTER_H
@@ -16,8 +17,8 @@ protected:
 	int damage;
 	int defense;
 	vector<Item*> items;
-	Item* equippedWeapon;
-	Item* equippedArmor;
+	Weapon* equippedWeapon;
+	Armor* equippedArmor;
 	int wallet;
 
 public:
@@ -48,7 +49,6 @@ public:
 
 	virtual void updateDamage() = 0;
 	virtual void updateDefense() = 0;
-	virtual void payMoney() = 0;
 
 };
 #endif // !CHARACTER_H
