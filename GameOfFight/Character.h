@@ -23,7 +23,8 @@ protected:
 
 public:
 	Character();
-	Character(string name, string title);
+	Character(int health, int maxHealth, int damage, int defense, int wallet,
+		string name, string title);
 
 	void setName(string name);
 	string getName() const;

@@ -23,7 +23,9 @@ private:
 
 public:
 	Player();
-	Player(string name, string title);
+	Player(int titleDmgMod, int titleDefMod, int powerLevel, int currentTopDmg, int currentTopDef,
+		int victories, int defeats, int health, int maxHealth, int damage, int defense, int wallet,
+		string name, string title);
 
 	void setTitleDmgMod(int mod);
 	int getTitleDmgMod() const;

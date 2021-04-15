@@ -27,7 +27,7 @@ class Game
 {
 private:
 	// data members
-	Player player;
+	vector<Player> playerVector; // lazy yet effective solution to dealing with loading new player objects
 	fstream playerDataFile;
 	const fs::path playerDataFolderPath = "./player_data";
 

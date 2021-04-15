@@ -4,12 +4,13 @@ Character::Character()
 {
 	name = ""; title = ""; health = 0;
 	maxHealth = 0; damage = 0; defense = 0; wallet = 0;
-	// still need to initialize items, should contain fist and shirt
 }
 
-Character::Character(string name, string title)
+Character::Character(int health, int maxHealth, int damage, int defense, int wallet,
+	string name, string title)
 {
-	this->name = name; this->title = title;
+	this->health = health; this->maxHealth = maxHealth; this->damage = damage;
+	this->defense = defense; this->wallet = wallet; this->name = name; this->title = title;
 }
 
 void Character::setName(string name)

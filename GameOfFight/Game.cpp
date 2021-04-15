@@ -209,6 +209,9 @@ void Game::newSave()
 
 void Game::loadSave(json& save)
 {
+	// gonna need to clear the player when loading new data over old. make a method in player most likely.
+	// for now, the first load initializes player to default empty values. 
+	// maybe I can copy constructor a local player object in this function to the game player? 
 
 }
 
