@@ -11,8 +11,8 @@ private:
 	int titleDmgMod; // damage modifier from player character title
 	int titleDefMod; // defense modifier from player character title
 	int powerLevel;
-	int currentTopDamage;
-	int currentTopDefense;
+	int currentTopDmg;
+	int currentTopDef;
 	int victories;
 	int defeats;
 
@@ -37,8 +37,8 @@ public:
 	void updatePowerLevel();
 	int getPowerLevel() const;
 
-	void updateCurrentTopDamage();
-	void updateCurrentTopDefense();
+	void updateCurrentTopDmg();
+	void updateCurrentTopDef();
 
 	int getWallet() const;
 	void payMoney(int money);

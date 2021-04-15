@@ -43,7 +43,7 @@ void Player::updateDefense()
 
 void Player::updatePowerLevel()
 {
-	powerLevel = currentTopDamage + currentTopDefense + victories + defeats;
+	powerLevel = currentTopDmg + currentTopDef + victories + defeats;
 }
 
 int Player::getPowerLevel() const
@@ -51,19 +51,19 @@ int Player::getPowerLevel() const
 	return powerLevel;
 }
 
-void Player::updateCurrentTopDamage()
+void Player::updateCurrentTopDmg()
 {
-	if (damage > currentTopDamage) 
+	if (damage > currentTopDmg) 
 	{
-		currentTopDamage = damage;
+		currentTopDmg = damage;
 	}
 }
 
-void Player::updateCurrentTopDefense()
+void Player::updateCurrentTopDef()
 {
-	if (defense > currentTopDefense)
+	if (defense > currentTopDef)
 	{
-		currentTopDefense = defense;
+		currentTopDef = defense;
 	}
 }
 
