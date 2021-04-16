@@ -22,3 +22,11 @@ int Weapon::getDamage() const
 {
 	return damage;
 }
+
+const Weapon& Weapon::operator=(const Weapon& w)
+{
+	name = w.name;
+	worth = w.worth;
+	damage = w.damage;
+	return *this;
+}

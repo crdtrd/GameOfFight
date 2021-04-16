@@ -41,6 +41,8 @@ public:
 
 	void updateCurrentTopDmg();
 	void updateCurrentTopDef();
+	int getCurrentTopDmg() const;
+	int getCurrentTopDef() const;
 
 	int getWallet() const;
 	void payMoney(int money);
@@ -49,6 +51,12 @@ public:
 	void selectItem(int itemIndex) const;
 	Item* sellItem(int itemIndex);
 
+	int getVictories() const;
+	int getDefeats() const;
+	void addVictory();
+	void addDefeat();
+
+	const Player& operator=(const Player& p);
 };
 
 #endif // !PLAYER_H

@@ -39,10 +39,13 @@ public:
 	void setMaxHealth(int maxHealth);
 	int getMaxHealth() const;
 
-	void equipWeapon(int itemIndex);
-	void equipArmor(int itemIndex);
+	void equipWeapon(Weapon* w);
+	void equipArmor(Armor* a);
+	Weapon* getEquippedWeapon();
+	Armor* getEquippedArmor();
 
-	void addItem(Item*);
+	void addItem(Item* i);
+	vector<Item*> getItems() const;
 
 	int getDamage() const;
 	int getDefense() const;

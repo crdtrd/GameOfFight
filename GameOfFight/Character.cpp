@@ -58,19 +58,34 @@ int Character::getMaxHealth() const
 	return maxHealth;
 }
 
-void Character::equipWeapon(int itemIndex)
+void Character::equipWeapon(Weapon* w)
 {
-
+	equippedWeapon = w;
 }
 
-void Character::equipArmor(int itemIndex)
+void Character::equipArmor(Armor* a)
 {
-	
+	equippedArmor = a;
 }
 
-void Character::addItem(Item*)
+Weapon* Character::getEquippedWeapon()
 {
+	return equippedWeapon;
+}
 
+Armor* Character::getEquippedArmor()
+{
+	return equippedArmor;
+}
+
+void Character::addItem(Item* i)
+{
+	items.push_back(i);
+}
+
+vector<Item*> Character::getItems() const // keep an eye on this
+{
+	return items;
 }
 
 int Character::getDamage() const

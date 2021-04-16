@@ -5,8 +5,10 @@ Enemy::Enemy()
 
 }
 
-Enemy::Enemy(string name, string title)
-	:Character(name, title)
+Enemy::Enemy(int health, int maxHealth, int damage, int defense, int wallet,
+	string name, string title)
+	:Character(health, maxHealth, damage, defense, wallet,
+		name, title)
 {
 
 }

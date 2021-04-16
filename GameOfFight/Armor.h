@@ -17,5 +17,7 @@ public:
 	void setDefense(int defense);
 	int getDefense() const;
 
+	const Armor& operator=(const Armor& a);
+
 };
 #endif // !ARMOR_H

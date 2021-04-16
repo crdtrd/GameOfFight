@@ -20,3 +20,11 @@ int Armor::getDefense() const
 {
 	return defense;
 }
+
+const Armor& Armor::operator=(const Armor& a)
+{
+	name = a.name;
+	worth = a.worth;
+	defense = a.defense;
+	return *this;
+}

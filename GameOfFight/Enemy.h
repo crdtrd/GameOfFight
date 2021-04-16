@@ -10,7 +10,8 @@ class Enemy : public Character
 {
 public:
 	Enemy();
-	Enemy(string name, string title);
+	Enemy(int health, int maxHealth, int damage, int defense, int wallet,
+		string name, string title);
 	
 	void updateDamage();
 	void updateDefense();

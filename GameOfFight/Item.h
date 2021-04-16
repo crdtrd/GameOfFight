@@ -23,6 +23,7 @@ public:
 	void setWorth(int worth);
 	int getWorth() const;
 
+	virtual ~Item(); // added this for dynamic casting. really should add this for everything
 };
 
 #endif // !ITEM_H
