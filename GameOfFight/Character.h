@@ -16,9 +16,9 @@ protected:
 	int maxHealth;
 	int damage;
 	int defense;
-	vector<Item*> items;
-	Weapon* equippedWeapon;
-	Armor* equippedArmor;
+	vector<Item> items;
+	Weapon equippedWeapon;
+	Armor equippedArmor;
 	int wallet;
 
 public:
@@ -39,13 +39,13 @@ public:
 	void setMaxHealth(int maxHealth);
 	int getMaxHealth() const;
 
-	void equipWeapon(Weapon* w);
-	void equipArmor(Armor* a);
-	Weapon* getEquippedWeapon();
-	Armor* getEquippedArmor();
+	void equipWeapon(Weapon w);
+	void equipArmor(Armor a);
+	Weapon getEquippedWeapon() const;
+	Armor getEquippedArmor() const;
 
-	void addItem(Item* i);
-	vector<Item*> getItems() const;
+	void addItem(Item i);
+	vector<Item> getItems() const;
 
 	int getDamage() const;
 	int getDefense() const;

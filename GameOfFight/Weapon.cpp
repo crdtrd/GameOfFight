@@ -23,6 +23,12 @@ int Weapon::getDamage() const
 	return damage;
 }
 
+string Weapon::toString() const
+{
+	string s = name + "\nDamage: " + to_string(damage) + "\nWorth: " + to_string(worth) + "\n";
+	return s;
+}
+
 const Weapon& Weapon::operator=(const Weapon& w)
 {
 	name = w.name;

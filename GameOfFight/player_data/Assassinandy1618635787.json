@@ -1,0 +1,34 @@
+[
+  {
+    "armors": [],
+    "currentTopDef": 0,
+    "currentTopDmg": 0,
+    "damage": 0,
+    "defeats": 0,
+    "defense": 0,
+    "equippedArmor": {
+      "defense": 0,
+      "name": "Shirt",
+      "worth": 0
+    },
+    "equippedWeapon": {
+      "damage": 10,
+      "name": "Fist",
+      "worth": 0
+    },
+    "fileName": "Assassinandy1618635787.json",
+    "health": 100,
+    "maxHealth": 100,
+    "name": "andy",
+    "powerLevel": 0,
+    "saveName": "Autosave",
+    "saveSlot": "A",
+    "saveTime": 1618635787,
+    "title": "Assassin",
+    "titleDefMod": 0,
+    "titleDmgMod": 0,
+    "victories": 0,
+    "wallet": 0,
+    "weapons": []
+  }
+]

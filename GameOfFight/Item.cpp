@@ -36,3 +36,9 @@ int Item::getWorth() const
 {
 	return worth;
 }
+
+string Item::toString() const
+{
+	string s = name + "\nWorth: " + to_string(worth) + "\n";
+	return s;
+}

@@ -39,12 +39,12 @@ int Player::getTitleDefMod() const
 
 void Player::updateDamage()
 {
-	damage = (round(equippedWeapon->getDamage() + (equippedWeapon->getDamage() / double(titleDmgMod))));
+	damage = (round(equippedWeapon.getDamage() + (equippedWeapon.getDamage() / double(titleDmgMod))));
 }
 
 void Player::updateDefense()
 {
-	defense = (round(equippedArmor->getDefense() + (equippedArmor->getDefense() / double(titleDefMod))));
+	defense = (round(equippedArmor.getDefense() + (equippedArmor.getDefense() / double(titleDefMod))));
 }
 
 void Player::updatePowerLevel()

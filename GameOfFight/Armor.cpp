@@ -21,6 +21,13 @@ int Armor::getDefense() const
 	return defense;
 }
 
+string Armor::toString() const
+{
+	string s = name + "\nDefense: " + to_string(defense) + "\nWorth: " + to_string(worth) + "\n";
+	return s;
+}
+
+
 const Armor& Armor::operator=(const Armor& a)
 {
 	name = a.name;

@@ -17,6 +17,8 @@ public:
 	void setDefense(int defense);
 	int getDefense() const;
 
+	string toString() const;
+
 	const Armor& operator=(const Armor& a);
 
 };

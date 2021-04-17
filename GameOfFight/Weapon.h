@@ -17,6 +17,8 @@ public:
 	void setDamage(int damage);
 	int getDamage() const;
 
+	string toString() const;
+
 	const Weapon& operator=(const Weapon& w);
 
 };

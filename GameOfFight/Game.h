@@ -32,6 +32,8 @@ private:
 	const fs::path playerDataFolderPath = "./player_data"; // path to player data folder 
 	json selectedPlayerFile; //json data that has all selected player saves
 	json selectedPlayerSave; // json data that has a specific save. used primarily for loading saves.
+	bool quit; // controls whether we quittin or not and is actually a bit buggy atm
+	// should have all menus returning booleans or somehting i need ta figure that
 
 	// data and file functions
 	
@@ -51,17 +53,27 @@ private:
 	void decisionSaves();
 	void decisionStats();
 	void decisionShop();
-	void decisionItems();
+	void decisionItems() throw (invalid_argument);
 	void decisionFight();
 
 	// decision sub-menus
+	void equippedItemFocusMenu(Item& i);
+	void itemFocusMenu(Item& i);
+	void saveFocusMenu(char slot);
 	void newSaveMenu();
 	void overwriteMenu(char slot);
 	void nameSaveMenu(char slot);
 
 	// file functions
+	void printSaves(int min, int max); // dependent on selectedPlayerFile. takes in save print range 65 = A, 90 = Z
+
 	void newSave(char slot, string saveName); // the act of creating/overwriting a save
-	void loadSave(); // load save data to player object
+
+	void autoSave(); // autosaving
+
+	void loadSave(); // load save data to player object. dependent on the selected playerSave
+
+	json constructNewSaveJson(char slot, string saveName, string filePathName); // the act of loading player data into a json to be saved in a save slot
 	json newPlayerFile(string& newName, string& newTitle); // used in creating a new player file
 	json getMostRecentSave(json& playerInfo); // gets most recent save from a file
 
