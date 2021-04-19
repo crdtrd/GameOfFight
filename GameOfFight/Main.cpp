@@ -1,5 +1,4 @@
-#include <fstream>
-#include <iostream>
+// Christian Deardorff: This my own work.
 
 #include "Game.h"
 

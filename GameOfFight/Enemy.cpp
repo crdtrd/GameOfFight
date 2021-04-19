@@ -1,3 +1,4 @@
+// Christian Deardorff: This my own work.
 #include "Enemy.h"
 
 Enemy::Enemy()
@@ -20,5 +21,5 @@ void Enemy::updateDamage()
 
 void Enemy::updateDefense()
 {
-	damage = static_cast<Armor*>(equippedArmor)->getDefense();
+	defense = static_cast<Armor*>(equippedArmor)->getDefense();
 }

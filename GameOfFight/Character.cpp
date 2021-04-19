@@ -1,3 +1,4 @@
+// Christian Deardorff: This my own work.
 #include "Character.h"
 
 Character::Character()
@@ -109,19 +110,9 @@ void Character::takeDamage()
 
 }
 
-// an attack. right is attacking left
+// an attack. right is attacking left. need to come up with an equation.
 int Character::operator-(const Character& attacker)
 {
-	int dDefense;
-	try
-	{
-		dDefense = damage * (1 / defense);
-	}
-	catch (runtime_error& e)
-	{
-		dDefense = 0;
-	}
-	int aDamage = damage - dDefense;
-	health -= aDamage;
-	return aDamage;
+	health -= attacker.damage;
+	return attacker.damage;
 }

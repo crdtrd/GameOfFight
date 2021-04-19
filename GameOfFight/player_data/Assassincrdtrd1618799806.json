@@ -1,0 +1,104 @@
+[
+  {
+    "armors": [],
+    "currentTopDef": 0,
+    "currentTopDmg": 11,
+    "damage": 11,
+    "defeats": 0,
+    "defense": 0,
+    "equippedArmor": {
+      "defense": 0,
+      "name": "Shirt",
+      "worth": 0
+    },
+    "equippedWeapon": {
+      "damage": 10,
+      "name": "Fist",
+      "worth": 0
+    },
+    "fileName": "Assassincrdtrd1618799806.json",
+    "health": 60,
+    "maxHealth": 100,
+    "name": "crdtrd",
+    "powerLevel": 11,
+    "saveName": "Autosave",
+    "saveSlot": "A",
+    "saveTime": 1618805528,
+    "title": "Assassin",
+    "titleDefMod": -10,
+    "titleDmgMod": 10,
+    "victories": 0,
+    "wallet": 37,
+    "weapons": []
+  },
+  {
+    "armors": [],
+    "currentTopDef": 0,
+    "currentTopDmg": 11,
+    "damage": 11,
+    "defeats": 0,
+    "defense": 0,
+    "equippedArmor": {
+      "defense": 0,
+      "name": "Shirt",
+      "worth": 0
+    },
+    "equippedWeapon": {
+      "damage": 10,
+      "name": "Fist",
+      "worth": 0
+    },
+    "fileName": "Assassincrdtrd1618799806.json",
+    "health": 100,
+    "maxHealth": 100,
+    "name": "crdtrd",
+    "powerLevel": 11,
+    "saveName": "b",
+    "saveSlot": "B",
+    "saveTime": 1618799875,
+    "title": "Assassin",
+    "titleDefMod": -10,
+    "titleDmgMod": 10,
+    "victories": 0,
+    "wallet": 0,
+    "weapons": []
+  },
+  {
+    "armors": [
+      {
+        "defense": 0,
+        "name": "Shirt",
+        "worth": 0
+      }
+    ],
+    "currentTopDef": 9,
+    "currentTopDmg": 11,
+    "damage": 11,
+    "defeats": 0,
+    "defense": 9,
+    "equippedArmor": {
+      "defense": 10,
+      "name": "Long Sleeve Shirt",
+      "worth": 10
+    },
+    "equippedWeapon": {
+      "damage": 10,
+      "name": "Glass Bottle",
+      "worth": 10
+    },
+    "fileName": "Assassincrdtrd1618799806.json",
+    "health": 100,
+    "maxHealth": 100,
+    "name": "crdtrd",
+    "powerLevel": 20,
+    "saveName": "c",
+    "saveSlot": "C",
+    "saveTime": 1618805698,
+    "title": "Assassin",
+    "titleDefMod": -10,
+    "titleDmgMod": 10,
+    "victories": 0,
+    "wallet": 17,
+    "weapons": []
+  }
+]

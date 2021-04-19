@@ -1,3 +1,4 @@
+// Christian Deardorff: This my own work.
 #include "Weapon.h"
 
 Weapon::Weapon()

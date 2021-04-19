@@ -1,3 +1,4 @@
+// Christian Deardorff: This my own work.
 #pragma once
 // this is for Sleep()
 #ifdef _WIN32 
@@ -18,7 +19,6 @@ namespace fs = std::filesystem;
 #include "Item.h"
 #include "Weapon.h"
 #include "Armor.h"
-#include "Shop.h"
 #include "Enemy.h"
 #include "Player.h"
 

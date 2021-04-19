@@ -1,3 +1,4 @@
+// Christian Deardorff: This my own work.
 #include "Player.h"
 
 Player::Player()
@@ -133,7 +134,7 @@ void Player::addDefeat()
 
 void Character::setWallet(int money)
 {
-
+	wallet = money;
 }
 
 int Character::getWallet() const
@@ -147,7 +148,7 @@ string Player::toString()
 		+ "\nPower Level: " + to_string(powerLevel)
 		+ "\nClass: " + title
 		+ "\nWallet: $" + to_string(wallet)
-		+ "\nHP: " + to_string(health)
+		+ "\nHP: " + to_string(health) + "\n"
 		+ equippedWeapon->getName() + ": " + to_string(static_cast<Weapon*>(equippedWeapon)->getDamage()) + " damage\n"
 		+ equippedArmor->getName() + ": " + to_string(static_cast<Armor*>(equippedArmor)->getDefense()) + " defense\n"
 		+ "\nMax HP: " + to_string(maxHealth)

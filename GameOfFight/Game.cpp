@@ -1,3 +1,5 @@
+// Christian Deardorff: This my own work.
+
 #include "Game.h"
 
 // CONSTRUCTOR
@@ -171,6 +173,7 @@ void Game::decisionMenu()
 		{
 			// player operations for debuggin or something
 			player.updateStats();
+			player.setHealth(player.getMaxHealth());
 			// print decision menu
 			cout << player.getName() << " - $" << player.getWallet() << " - HP: " << player.getHealth() << endl
 				<< "[4] Fight\n[3] Items\n[2] Shop\n[1] Stats\n[0] Saves\n[-] Character Select\n[=] Quit Game\n";
@@ -453,28 +456,37 @@ void Game::decisionFight()
 {
 	bool fightAgain = true;
 	bool run = false;
+	bool newEnemy = true;
 	while (!run && fightAgain)
 	{
-		loadNewEnemy();
-		cout << enemy.getName() << " " << enemy.getTitle() << " approaches!"
-			<< "\n[1] Fight " << enemy.getTitle()
+		if (newEnemy) 
+		{ 
+			loadNewEnemy(); 
+			newEnemy = false;
+		}
+		cout << enemy.getTitle() << " " << enemy.getName() << " approaches!"
+			<< "\n[1] Fight " << enemy.getName()
 			<< "\n[-] Run Away\n";
 		//input
-		string ui; cin >> ui;
+		string ui; std::cin >> ui;
 		if (ui == "-")
 		{
 			clearScreen();
 			cout << "Lame...";
 			Sleep(1000);
+			clearScreen();
 			run = true;
 		}
 		else if (ui == "1")
 		{
 			autoSave();
 			fightAgain = fight(); // find a new fight or not
+			newEnemy = fightAgain;
 		}
 		else { badInput(ui); }
 	}
+	if (!fightAgain) { restockShop = true; }
+	autoSave();
 	return;
 }
 
@@ -1145,19 +1157,20 @@ bool Game::fight()
 			<< "[2] Attack\n[1] Items\n[-] Run\n";
 
 		// input
-		string ui; cin >> ui;
+		string ui; std::cin >> ui;
 
 		// decision
 		if (ui == "2") // attack
 		{
-			cout << player.getName() << " attacks with " << player.getEquippedWeapon()->getName() << endl;
-			Sleep(1000);
+			clearScreen();
 			int attack = enemy - player; // deals damage on enemy from player and returns that damage.
 			cout << "Fight!\n"
 				<< enemy.getName() << " - HP: " << enemy.getHealth() << endl
 				<< player.getName() << " - HP: " << player.getHealth() << endl
-				<< player.getName() << " attacks with " << player.getEquippedWeapon()->getName() << endl
-				<< player.getName() << " dealt " << attack << " damage!";
+			    << player.getName() << " attacks with " << player.getEquippedWeapon()->getName() << endl;
+			Sleep(1000);
+			cout << player.getName() << " dealt " << attack << " damage!\n";
+			Sleep(2000);
 
 			if (enemy.getHealth() < 0) // is enemy dead
 			{
@@ -1169,18 +1182,19 @@ bool Game::fight()
 			}
 			else // enemy is not dead and attacks
 			{
+				clearScreen();
+				int attack = player - enemy;
 				cout << "Fight!\n"
 					<< enemy.getName() << " - HP: " << enemy.getHealth() << endl
-					<< player.getName() << " - HP: " << player.getHealth() << endl;
+					<< player.getName() << " - HP: " << player.getHealth() << endl
+				    << enemy.getName() << " attacks with " << enemy.getEquippedWeapon()->getName() << endl;
 				Sleep(1000);
-				int attack = player - enemy;
-				cout << enemy.getName() << " attacks with " << enemy.getEquippedWeapon()->getName() << endl
-					<< enemy.getName() << " dealt " << attack << " damage!";
+				cout << enemy.getName() << " dealt " << attack << " damage!";
+				Sleep(2000);
+				clearScreen();
 			}
 			if (player.getHealth() < 0) // is player dead
 			{
-				Sleep(1000);
-				clearScreen();
 				fightLose();
 				end = true;
 			}
@@ -1208,14 +1222,16 @@ bool Game::fightWin()
 	{
 		cout << player.getName() << " has defeated " << enemy.getName() << "! + $" << enemy.getWallet()
 			<< "\n[1] Find another fight\n[-] Leave\n";
-		string ui; cin >> ui;
+		string ui; std::cin >> ui;
 		if (ui == "1")
 		{
+			clearScreen();
 			fightAgain = true;
 			cancel = true;
 		}
 		else if (ui == "-")
 		{
+			clearScreen();
 			cancel = true;
 		}
 		else { badInput(ui); }
@@ -1250,7 +1266,7 @@ bool Game::runAway()
 		cout << "Run!?\n[1] Run - $" << enemy.getWallet() / 2
 			<< "\n[-] Cancel\n";
 		// input
-		string ui; cin >> ui;
+		string ui; std::cin >> ui;
 
 		//decision
 		if (ui == "1")
@@ -1263,6 +1279,13 @@ bool Game::runAway()
 				cancel = true;
 				Sleep(1000);
 				clearScreen();
+			}
+			else
+			{
+				cout << "Not enough money";
+				Sleep(1000);
+				clearScreen();
+				cancel = true;
 			}
 		}
 		else if (ui == "-")
