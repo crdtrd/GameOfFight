@@ -11,7 +11,8 @@ void Game::play()
 	playerSelect();
 	return;
 }
-// DATA FUNCTIONSl
+
+// DATA FUNCTIONS
 
 
 // MAIN MENU FUNCTIONS
@@ -168,6 +169,8 @@ void Game::decisionMenu()
 	bool cancel = false;
 	while (!cancel)
 		{
+			// player operations for debuggin or something
+			player.updateStats();
 			// print decision menu
 			cout << player.getName() << " - $" << player.getWallet() << " - HP: " << player.getHealth() << endl
 				<< "[4] Fight\n[3] Items\n[2] Shop\n[1] Stats\n[0] Saves\n[-] Character Select\n[=] Quit Game\n";
@@ -175,6 +178,8 @@ void Game::decisionMenu()
 			string ui; std::cin >> ui;
 			if (ui == "4") 
 			{
+				clearScreen();
+				decisionFight();
 			}
 			else if (ui == "3") 
 			{
@@ -183,9 +188,13 @@ void Game::decisionMenu()
 			}
 			else if (ui == "2") 
 			{
+				clearScreen();
+				decisionShop();
 			}
 			else if (ui == "1") 
 			{
+				clearScreen();
+				decisionStats();
 			}
 			else if (ui == "0") 
 			{
@@ -251,7 +260,7 @@ void Game::decisionCharacterSelect()
 	bool cancel = false;
 	while (!cancel)
 	{
-		cout << "Go to character select\n[2] Save and go\n[1] Autosave and go\n[0] Go without saving\n[-] Cancel";
+		cout << "Go to character select\n[2] Save and go\n[1] Autosave and go\n[0] Go without saving\n[-] Cancel\n";
 
 		string ui; std::cin >> ui;
 
@@ -319,27 +328,87 @@ void Game::decisionSaves()
 
 void Game::decisionStats()
 {
+	bool cancel = false;
+	while (!cancel)
+	{
+		cout << player.toString();
+		cout << "\n[-] Cancel\n";
 
+		string ui; cin >> ui;
+		if (ui == "-")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else
+		{ badInput(ui); }
+	}
 }
 
-void Game::decisionShop()
+void Game::decisionShop() //TODO save shop to player save file
 {
-
+	// restockShop = true; // testing 
+	bool cancel = false;
+	while (!cancel)
+	{
+		// print menu
+		cout << "Shop - " << player.getName() << " - $" << player.getWallet()
+			<< "\n[-] Cancel\n[0] Sell Items\n";
+		// check for restock
+		if (restockShop == true)
+		{
+			shop = stockShop();
+			restockShop = false;
+		}
+		// print stock
+		for (int i = 0; i < shop.size(); i++)
+		{
+			cout << "[" << i + 1 << "] " << shop[i]->getName() << endl;
+		}
+		// input
+		string ui; std::cin >> ui;
+		if (ui == "-")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else if (ui == "0")
+		{
+			clearScreen();
+			sellItemsMenu();
+		}
+		else
+		{
+			try
+			{
+				int index = stoi(ui) - 1;
+				if (index >= 0 && index < shop.size())
+				{
+					clearScreen();
+					buyItemFocusMenu(index);
+				}
+				else { badInput(ui); }
+			}
+			catch (invalid_argument& e) { badInput(ui); }
+			}
+	}
+	return;
 }
 
 void Game::decisionItems() throw (invalid_argument)
 {
+	// Item* wep = new Weapon("test", 10, 10); player.addItem(wep);
 	bool cancel = false;
 	while (!cancel)
 	{
 		// print menu
 		cout << "Items - " << player.getName() << "\n[-] Cancel\n[1] " 
-			<< player.getEquippedWeapon().getName() << " (Equipped)\n[2] "
-			<< player.getEquippedArmor().getName() << " (Equipped)\n";
-		vector<Item> items = player.getItems();
+			<< player.getEquippedWeapon()->getName() << " (Equipped)\n[2] "
+			<< player.getEquippedArmor()->getName() << " (Equipped)\n";
+		vector<Item*> items = player.getItems();
 		for (int i = 0, j = 3; i < items.size(); i++, j++)
 		{
-			cout << "[" << j << "] " << items[i].getName() << endl;
+			cout << "[" << j << "] " << items[i]->getName() << endl;
 		}
 		
 		// input
@@ -352,13 +421,13 @@ void Game::decisionItems() throw (invalid_argument)
 		else if (ui == "1")
 		{
 			clearScreen();
-			Weapon w = player.getEquippedWeapon();
+			Item* w = player.getEquippedWeapon();
 			equippedItemFocusMenu(w);
 		}
 		else if (ui == "2")
 		{
 			clearScreen();
-			Armor a = player.getEquippedArmor();
+			Item* a = player.getEquippedArmor();
 			equippedItemFocusMenu(a);
 		}
 		else
@@ -367,10 +436,10 @@ void Game::decisionItems() throw (invalid_argument)
 			{
 				int ui2 = 0;
 				ui2 = stoi(ui);
-				if (3 <= ui2 && ui2 < items.size())
+				if (ui2 >= 3 && ui2 < items.size()+3)
 				{
 					clearScreen();
-					itemFocusMenu(items[ui2 - 3]);
+					itemFocusMenu(ui2-3);
 				}
 				else { badInput(ui); }
 			}
@@ -382,17 +451,148 @@ void Game::decisionItems() throw (invalid_argument)
 
 void Game::decisionFight()
 {
-
+	bool fightAgain = true;
+	bool run = false;
+	while (!run && fightAgain)
+	{
+		loadNewEnemy();
+		cout << enemy.getName() << " " << enemy.getTitle() << " approaches!"
+			<< "\n[1] Fight " << enemy.getTitle()
+			<< "\n[-] Run Away\n";
+		//input
+		string ui; cin >> ui;
+		if (ui == "-")
+		{
+			clearScreen();
+			cout << "Lame...";
+			Sleep(1000);
+			run = true;
+		}
+		else if (ui == "1")
+		{
+			autoSave();
+			fightAgain = fight(); // find a new fight or not
+		}
+		else { badInput(ui); }
+	}
+	return;
 }
 
 // DECISION SUBMENU FUNCTIONS
 
-void Game::equippedItemFocusMenu(Item& i)
+void Game::buyItemFocusMenu(int itemIndex)
 {
 	bool cancel = false;
 	while (!cancel)
 	{
-		cout << i.toString() << "[-] Cancel\n";
+		// print menu
+		Item* t = shop[itemIndex];
+		std::cout << "Shop - Buy Item - " << player.getName() << " - $"
+			<< player.getWallet() << endl << t->toString() << "[1] Buy\n[-] Cancel\n";
+		//inout
+		string ui; std::cin >> ui;
+		if (ui == "1")
+		{
+			if (player.getWallet() - t->getWorth() > -1)
+			{
+				player.payMoney(t->getWorth());
+				player.addItem(t);
+				shop.erase(shop.begin() + itemIndex);
+				clearScreen();
+				cancel = true;
+			}
+			else
+			{
+				cout << "Not Enough Funds";
+				Sleep(1000);
+				clearScreen();
+			}
+		}
+		else if (ui == "-")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else { badInput(ui); }
+	}
+}
+
+void Game::sellItemsMenu()
+{
+	// sadly very copy paste. I have deadlines
+	bool cancel = false;
+	while (!cancel)
+	{
+		// print menu
+		std::cout << "Shop - Sell Items - " << player.getName() << " - $"
+			<< player.getWallet() << "\n[-] Cancel\n";
+		vector<Item*> items = player.getItems();
+		for (int i = 0, j = 1; i < items.size(); i++, j++)
+		{
+			std::cout << "[" << j << "] " << items[i]->getName() << endl;
+		}
+
+		// input
+		string ui; std::cin >> ui;
+		if (ui == "-")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else
+		{
+			try
+			{
+				int ui2 = 0;
+				ui2 = stoi(ui);
+				if (ui2 >= 1 && ui2 <= items.size())
+				{
+					clearScreen();
+					sellItemFocusMenu(ui2-1);
+				}
+				else { badInput(ui); }
+			}
+			catch (invalid_argument& e) { badInput(ui); }
+		}
+	}
+	return;
+}
+
+void Game::sellItemFocusMenu(int itemIndex)
+{
+	bool cancel = false;
+	while (!cancel)
+	{
+		// print menu
+		Item* t = player.getItems()[itemIndex];
+		std::cout << "Shop - Sell Items - " << player.getName() << " - $" 
+			<< player.getWallet() << endl << t->toString() << "[1] Sell\n[-] Cancel\n";
+		//input
+		string ui; std::cin >> ui;
+		if (ui == "1")
+		{
+			shop.push_back(t);
+			player.dropItem(itemIndex);
+			player.recieveMoney(t->getWorth());
+			clearScreen();
+			cancel = true;
+		}
+		else if (ui == "-")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else { badInput(ui); }
+	}
+	return;
+}
+
+void Game::equippedItemFocusMenu(Item* i)
+{
+	bool cancel = false;
+	while (!cancel)
+	{
+		cout << i->toString() << "[-] Cancel\n";
 		string ui; std::cin >> ui;
 		switch (ui[0])
 		{
@@ -403,26 +603,40 @@ void Game::equippedItemFocusMenu(Item& i)
 	return;
 }
 
-void Game::itemFocusMenu(Item& i)
+void Game::itemFocusMenu(int itemIndex)
 {
 	bool cancel = false;
 	while (!cancel)
 	{
-		cout << i.toString() << "[1] Equip\n[-] Cancel\n";
+		Item* t = player.getItems()[itemIndex];
+		cout << t->toString() << "[1] Equip\n[-] Cancel\n";
 		string ui; std::cin >> ui;
-		switch (ui[0])
+		if (ui == "1")
 		{
-		case '1':
-			// equip the thing
+			Weapon* w = dynamic_cast<Weapon*>(t);
+			Armor* a = dynamic_cast<Armor*>(t);
+				if (w != NULL)
+				{
+					player.addItem(player.getEquippedWeapon());
+					player.equipWeapon(w);
+					player.dropItem(itemIndex);
+					player.updateStats();
+				}
+				else if (a != NULL)
+				{
+					player.addItem(player.getEquippedArmor());
+					player.equipArmor(a);
+					player.dropItem(itemIndex);
+				}
 			clearScreen();
 			cancel = true;
-			break;
-		case '-':
-			cancel = true;
-			break;
-		default:
-			badInput(ui);
 		}
+		else if (ui == "-")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else { badInput(ui); }
 	}
 	return;
 }
@@ -430,7 +644,7 @@ void Game::itemFocusMenu(Item& i)
 void Game::saveFocusMenu(char slot)
 {
 	string s; s += slot;
-	int index;
+	int index = -1;
 	for (int i = 0; i < selectedPlayerFile.size(); i++)
 	{
 		string saveSlot = selectedPlayerFile[i]["saveSlot"].get<string>();
@@ -455,24 +669,27 @@ void Game::saveFocusMenu(char slot)
 		switch (ui[0])
 		{
 		case '2':
-			selectedPlayerSave = selectedPlayerFile[index];
 			clearScreen();
+			selectedPlayerSave = selectedPlayerFile[index];
 			newSaveMenu();
 			loadSave();
 			cancel = true;
 			break;
 		case '1':
+			clearScreen();
 			selectedPlayerSave = selectedPlayerFile[index];
 			autoSave();
 			loadSave();
 			cancel = true;
 			break;
 		case '0':
+			clearScreen();
 			selectedPlayerSave = selectedPlayerFile[index];
 			loadSave();
 			cancel = true;
 			break;
 		case '-':
+			clearScreen();
 			cancel = true;
 			break;
 		default:
@@ -641,8 +858,8 @@ void Game::loadSave()
 		string name = selectedPlayerSave["weapons"][i]["name"].get<string>();
 		int worth = selectedPlayerSave["weapons"][i]["worth"].get<int>();
 		int damage = selectedPlayerSave["weapons"][i]["damage"].get<int>();
-		Weapon w(name, worth, damage);
-		p.addItem(w);
+		Item* item = new Weapon(name, worth, damage);
+		p.addItem(item);
 	}
 
 	// load armor items
@@ -651,22 +868,22 @@ void Game::loadSave()
 		string name = selectedPlayerSave["armors"][i]["name"];
 		int worth = selectedPlayerSave["armors"][i]["worth"];
 		int defense = selectedPlayerSave["armors"][i]["defense"];
-		Armor a(name, worth, defense);
-		p.addItem(a);
+		Item* item = new Armor(name, worth, defense);
+		p.addItem(item);
 	}
 
 	// load equipped weapon
 	string wName = selectedPlayerSave["equippedWeapon"]["name"].get<string>();
 	int wWorth = selectedPlayerSave["equippedWeapon"]["worth"].get<int>();
 	int wDamage = selectedPlayerSave["equippedWeapon"]["damage"].get<int>();
-	Weapon w(wName, wWorth, wDamage);
+	Item* w = new Weapon(wName, wWorth, wDamage);
 	p.equipWeapon(w);
 
 	//load equipped armor
 	string aName = selectedPlayerSave["equippedArmor"]["name"].get<string>();
 	int aWorth = selectedPlayerSave["equippedArmor"]["worth"].get<int>();
 	int aDefense = selectedPlayerSave["equippedArmor"]["defense"].get<int>();
-	Armor a(aName, aWorth, aDefense);
+	Item* a = new Armor(aName, aWorth, aDefense);
 	p.equipArmor(a);
 
 	// deep copy p to player
@@ -678,18 +895,17 @@ json Game::constructNewSaveJson(char slot, string saveName, string fileName)
 {
 	// get items and sort them as weapons and armor and 
 	// put them into respective containers for saving
-	vector <Item> items = player.getItems();
+	vector <Item*> items = player.getItems();
 
 	json weapons = json::array();
 	json armors = json::array();
 
 	for (int i = 0; i < items.size(); i++)
 	{
-		Item t = items[i];
-		Item* pt = &t;
+		Item* t = items[i];
 		// dynamic casting. fun
-		Weapon* w = dynamic_cast<Weapon*>(pt);
-		Armor* a = dynamic_cast<Armor*>(pt);
+		Weapon* w = dynamic_cast<Weapon*>(t);
+		Armor* a = dynamic_cast<Armor*>(t);
 		if (w != NULL)
 		{
 			json j = {
@@ -711,21 +927,19 @@ json Game::constructNewSaveJson(char slot, string saveName, string fileName)
 	}
 
 	// get equipped weapon and its data members
-	Weapon equippedWeapon;
-	equippedWeapon = player.getEquippedWeapon();
+	Weapon* equippedWeapon = static_cast<Weapon*>(player.getEquippedWeapon()); // using static_cast because I expect a weapon pointer
 	json eW = {
-		{"name", equippedWeapon.getName()}, // throws error reading characters of string: bad_alloc
-		{"worth", equippedWeapon.getWorth()},
-		{"damage", equippedWeapon.getDamage()}
+		{"name", equippedWeapon->getName()}, // throws error reading characters of string: bad_alloc
+		{"worth", equippedWeapon->getWorth()},
+		{"damage", equippedWeapon->getDamage()}
 	};
 
 	// get equipped armor and its data members
-	Armor equippedArmor;
-	equippedArmor = player.getEquippedArmor();
+	Armor* equippedArmor = static_cast<Armor*>(player.getEquippedArmor());
 	json eA = {
-		{"name", equippedArmor.getName()},
-		{"worth", equippedArmor.getWorth()},
-		{"defense", equippedArmor.getDefense()}
+		{"name", equippedArmor->getName()},
+		{"worth", equippedArmor->getWorth()},
+		{"defense", equippedArmor->getDefense()}
 	};
 
 	string s; s += slot; // need this cuz slot has to be a string.
@@ -752,7 +966,7 @@ json Game::constructNewSaveJson(char slot, string saveName, string fileName)
 		{"titleDefMod", player.getTitleDefMod()},
 		{"titleDmgMod", player.getTitleDmgMod()},
 		{"victories", player.getVictories()},
-		{"wallet", player.getDefeats()},
+		{"wallet", player.getWallet()},
 		{"weapons", weapons}
 	};
 	return newSave;
@@ -765,6 +979,11 @@ json Game::newPlayerFile(string& newName, string& newTitle)
 	fs::path filePathName = playerDataFolderPath;
 	string fileName = newTitle + newName + to_string(time(0)) + ".json";
 	filePathName /= fileName;
+
+	// calculate title mods. 
+	int titleDefMod = 100000; int titleDmgMod = 100000;
+	if(newTitle == "Assassin") { titleDefMod = -10; titleDmgMod = 10; }
+	if(newTitle == "Tank") { titleDefMod = 10; titleDmgMod = -10; }
 	// construct the initial player data json
 	json armors = json::array();
 	json weapons = json::array();
@@ -794,8 +1013,8 @@ json Game::newPlayerFile(string& newName, string& newTitle)
 		{"saveSlot", "A"},
 		{"saveTime", time(0)},
 		{"title", newTitle},
-		{"titleDefMod", 0},
-		{"titleDmgMod", 0},
+		{"titleDefMod", titleDefMod},
+		{"titleDmgMod", titleDmgMod},
 		{"victories", 0},
 		{"wallet", 0},
 		{"weapons", weapons}
@@ -822,6 +1041,238 @@ json Game::getMostRecentSave(json& playerInfo)
 		}
 	}
 	return playerSave;
+}
+
+// SHOP FUNCTIONS
+vector<Item*> Game::stockShop()
+{
+	// clear shop
+	for (int i = 0; i < shop.size(); i++)
+	{
+		delete shop[i];
+	}
+	shop.clear();
+	// get item data. could hard code a map, but gonna read json file for now
+	ifstream itemDataIn;
+	json itemData;
+	itemDataIn.open("item_data.json");
+	itemDataIn >> itemData;
+	itemDataIn.close();
+
+	// determine tier to get items from. 
+	int itemTierIndex = (player.getPowerLevel() / 10) - 1;
+
+	// get random armor name. This one is kinda loaded.
+	string armorName = itemData[itemTierIndex]["armors"][rand() % (itemData[itemTierIndex]["armors"].size())]["name"].get<string>();
+
+	// get defense value. same as damage I guess
+	int armorDefense = int(ceil(player.getPowerLevel() / 2)+ (rand() % 2) + 5);
+
+	// get random weapon name
+	string weaponName = itemData[itemTierIndex]["weapons"][rand() % (itemData[itemTierIndex]["weapons"].size())]["name"].get<string>();
+
+	// get damage value
+	int weaponDamage = int(ceil(player.getPowerLevel() / 2) + (rand() % 2) + 5);
+
+	// for now just gonna generate 1 of each item type. worth is same as def/dam for now
+	Item* a = new Armor(armorName, armorDefense, armorDefense);
+	Item* w = new Weapon(weaponName, weaponDamage, weaponDamage);
+
+	// not sure why I don't just put this directly in shop. eh who cares
+	vector<Item*> deliveryTruck;
+	deliveryTruck.push_back(a); deliveryTruck.push_back(w);
+	return deliveryTruck;
+}
+
+// FIGHT FUNCTIONS
+void Game::loadNewEnemy()
+{
+	// more copy paste from stockShop. sorry
+	// here we equipping the enemy with items based off of player. rigged so the player wins right now,
+	// since consumables aren't in the game yet.
+	// get item data. could hard code a map, but gonna read json file for now
+	ifstream dataIn;
+	json itemData;
+	dataIn.open("item_data.json");
+	dataIn >> itemData;
+	dataIn.close();
+
+	// determine tier to get items from. 
+	int itemTierIndex = (player.getPowerLevel() / 10) - 1;
+
+	// get random armor name. This one is kinda loaded.
+	string armorName = itemData[itemTierIndex]["armors"][rand() % (itemData[itemTierIndex]["armors"].size())]["name"].get<string>();
+
+	// get defense value. same as damage I guess
+	int armorDefense = int(ceil(player.getPowerLevel() / 2) + (rand() % 2));
+
+	// get random weapon name
+	string weaponName = itemData[itemTierIndex]["weapons"][rand() % (itemData[itemTierIndex]["weapons"].size())]["name"].get<string>();
+
+	// get damage value
+	int weaponDamage = int(ceil(player.getPowerLevel() / 2) + (rand() % 2));
+
+	Item* a = new Armor(armorName, armorDefense, armorDefense);
+	Item* w = new Weapon(weaponName, weaponDamage, weaponDamage);
+	
+	delete enemy.getEquippedWeapon(); // should deallocate the memory here
+	enemy.equipWeapon(w); // equip new weapon
+	delete enemy.getEquippedArmor(); 
+	enemy.equipArmor(a); // equip new armor
+
+	// more enemy things. not final values. here for demonstration
+	enemy.updateDamage();
+	enemy.updateDefense();
+	enemy.setMaxHealth(player.getMaxHealth() - 10);
+	enemy.setHealth(enemy.getMaxHealth());
+	enemy.setWallet(player.getWallet()/4+10); 
+
+	// for now we will always be fighting fighter chad
+	enemy.setName("Chad");
+	enemy.setTitle("Fighter");
+}
+
+bool Game::fight()
+{
+	bool fightAgain = false;
+	bool end = false;
+	while (!end)
+	{
+		// fight menu
+		cout << "Fight!\n"
+			<< enemy.getName() << " - HP: " << enemy.getHealth() << endl
+			<< player.getName() << " - HP: " << player.getHealth() << endl
+			<< "[2] Attack\n[1] Items\n[-] Run\n";
+
+		// input
+		string ui; cin >> ui;
+
+		// decision
+		if (ui == "2") // attack
+		{
+			cout << player.getName() << " attacks with " << player.getEquippedWeapon()->getName() << endl;
+			Sleep(1000);
+			int attack = enemy - player; // deals damage on enemy from player and returns that damage.
+			cout << "Fight!\n"
+				<< enemy.getName() << " - HP: " << enemy.getHealth() << endl
+				<< player.getName() << " - HP: " << player.getHealth() << endl
+				<< player.getName() << " attacks with " << player.getEquippedWeapon()->getName() << endl
+				<< player.getName() << " dealt " << attack << " damage!";
+
+			if (enemy.getHealth() < 0) // is enemy dead
+			{
+				Sleep(1000);
+				clearScreen();
+				player.recieveMoney(enemy.getWallet());
+				fightAgain = fightWin();
+				end = true;
+			}
+			else // enemy is not dead and attacks
+			{
+				cout << "Fight!\n"
+					<< enemy.getName() << " - HP: " << enemy.getHealth() << endl
+					<< player.getName() << " - HP: " << player.getHealth() << endl;
+				Sleep(1000);
+				int attack = player - enemy;
+				cout << enemy.getName() << " attacks with " << enemy.getEquippedWeapon()->getName() << endl
+					<< enemy.getName() << " dealt " << attack << " damage!";
+			}
+			if (player.getHealth() < 0) // is player dead
+			{
+				Sleep(1000);
+				clearScreen();
+				fightLose();
+				end = true;
+			}
+		}
+		else if (ui == "1") // items
+		{
+			clearScreen();
+			decisionItems();
+		}
+		else if (ui == "-") // run away
+		{
+			clearScreen();
+			end = runAway();
+		}
+		else { badInput(ui); }
+	}
+	return fightAgain;
+}
+
+bool Game::fightWin()
+{
+	bool cancel = false; // in this case this is just for getting out of this menu
+	bool fightAgain = false;
+	while (!cancel)
+	{
+		cout << player.getName() << " has defeated " << enemy.getName() << "! + $" << enemy.getWallet()
+			<< "\n[1] Find another fight\n[-] Leave\n";
+		string ui; cin >> ui;
+		if (ui == "1")
+		{
+			fightAgain = true;
+			cancel = true;
+		}
+		else if (ui == "-")
+		{
+			cancel = true;
+		}
+		else { badInput(ui); }
+	}
+	return fightAgain;
+}
+
+void Game::fightLose()
+{
+	bool cancel = false;
+	while (!cancel)
+	{
+		cout << enemy.getName() << " has defeated " << player.getName() << "! - $" << enemy.getWallet() // penelty for lose is rewards right now
+			<< "\n[1] Continue\n";
+		string ui; cin >> ui;
+		if (ui == "1")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else { badInput(ui); }
+	}
+	return;
+}
+
+bool Game::runAway()
+{
+	bool run = false;
+	bool cancel = false;
+	while (!cancel)
+	{
+		cout << "Run!?\n[1] Run - $" << enemy.getWallet() / 2
+			<< "\n[-] Cancel\n";
+		// input
+		string ui; cin >> ui;
+
+		//decision
+		if (ui == "1")
+		{
+			if (player.getWallet() - enemy.getWallet() >= 0) // can player pay
+			{
+				clearScreen();
+				cout << "Loser...";
+				run = true;
+				cancel = true;
+				Sleep(1000);
+				clearScreen();
+			}
+		}
+		else if (ui == "-")
+		{
+			clearScreen();
+			cancel = true;
+		}
+		else { badInput(ui); }
+	}
+	return run;
 }
 
 // OTHER FUNCTIONS

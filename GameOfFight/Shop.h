@@ -9,7 +9,7 @@
 class Shop
 {
 private:
-	vector<Item*> items;
+	vector<Item> items;
 
 public:
 	Shop();
@@ -19,8 +19,11 @@ public:
 	
 	void selectItem(int itemIndex);
 
-	Item* sellItem();
-	void recieveItem(Item* i);
+	Item sellItem();
+	void recieveItem(Item i);
 
 };
 #endif // !SHOP_H
+
+
+/////// PROLLY NOT USING THIS

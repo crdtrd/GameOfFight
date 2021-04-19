@@ -58,34 +58,40 @@ int Character::getMaxHealth() const
 	return maxHealth;
 }
 
-void Character::equipWeapon(Weapon w)
+void Character::equipWeapon(Item* w)
 {
+	// puts current equipped weapon in items and equips passed in weapon
 	equippedWeapon = w;
 }
 
-void Character::equipArmor(Armor a)
+void Character::equipArmor(Item* a)
 {
 	equippedArmor = a;
 }
 
-Weapon Character::getEquippedWeapon() const
+Item* Character::getEquippedWeapon() const
 {
 	return equippedWeapon;
 }
 
-Armor Character::getEquippedArmor() const
+Item* Character::getEquippedArmor() const
 {
 	return equippedArmor;
 }
 
-void Character::addItem(Item i)
+void Character::addItem(Item* i)
 {
 	items.push_back(i);
 }
 
-vector<Item> Character::getItems() const // keep an eye on this
+vector<Item*> Character::getItems() const // keep an eye on this
 {
 	return items;
+}
+
+void Character::dropItem(int itemIndex)
+{
+	items.erase(items.begin() + itemIndex);
 }
 
 int Character::getDamage() const
@@ -101,4 +107,21 @@ int Character::getDefense() const
 void Character::takeDamage()
 {
 
+}
+
+// an attack. right is attacking left
+int Character::operator-(const Character& attacker)
+{
+	int dDefense;
+	try
+	{
+		dDefense = damage * (1 / defense);
+	}
+	catch (runtime_error& e)
+	{
+		dDefense = 0;
+	}
+	int aDamage = damage - dDefense;
+	health -= aDamage;
+	return aDamage;
 }

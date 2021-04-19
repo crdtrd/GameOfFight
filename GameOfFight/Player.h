@@ -26,6 +26,7 @@ public:
 	Player(int titleDmgMod, int titleDefMod, int powerLevel, int currentTopDmg, int currentTopDef,
 		int victories, int defeats, int health, int maxHealth, int damage, int defense, int wallet,
 		string name, string title);
+	void updateStats();
 
 	void setTitleDmgMod(int mod);
 	int getTitleDmgMod() const;
@@ -44,7 +45,6 @@ public:
 	int getCurrentTopDmg() const;
 	int getCurrentTopDef() const;
 
-	int getWallet() const;
 	void payMoney(int money);
 	void recieveMoney(int money);
 
@@ -55,6 +55,8 @@ public:
 	int getDefeats() const;
 	void addVictory();
 	void addDefeat();
+
+	string toString();
 
 	const Player& operator=(const Player& p);
 };

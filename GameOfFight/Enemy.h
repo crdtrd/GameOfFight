@@ -16,8 +16,5 @@ public:
 	void updateDamage();
 	void updateDefense();
 
-	void updateWallet(); // enemy money determined by powerlevel
-	void payMoney(Player& p); // pay all money to player
-
 };
 #endif // !ENEMY_H

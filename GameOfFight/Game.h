@@ -27,12 +27,15 @@ class Game
 {
 private:
 	// data members
-	Player player; 
+	Player player;
+	Enemy enemy;
 	fstream playerDataFile; // for accessing files
 	const fs::path playerDataFolderPath = "./player_data"; // path to player data folder 
 	json selectedPlayerFile; //json data that has all selected player saves
 	json selectedPlayerSave; // json data that has a specific save. used primarily for loading saves.
 	bool quit; // controls whether we quittin or not and is actually a bit buggy atm
+	vector<Item*> shop; // the shop. making it a member cuz its persistent.
+	bool restockShop; // whether or not to restock. should be set to true after a fight
 	// should have all menus returning booleans or somehting i need ta figure that
 
 	// data and file functions
@@ -57,8 +60,11 @@ private:
 	void decisionFight();
 
 	// decision sub-menus
-	void equippedItemFocusMenu(Item& i);
-	void itemFocusMenu(Item& i);
+	void buyItemFocusMenu(int itemIndex);
+	void sellItemsMenu();
+	void sellItemFocusMenu(int itemIndex);
+	void equippedItemFocusMenu(Item* i);
+	void itemFocusMenu(int itemIndex);
 	void saveFocusMenu(char slot);
 	void newSaveMenu();
 	void overwriteMenu(char slot);
@@ -77,8 +83,20 @@ private:
 	json newPlayerFile(string& newName, string& newTitle); // used in creating a new player file
 	json getMostRecentSave(json& playerInfo); // gets most recent save from a file
 
-	// enemy creation
+	// shop functions
+	vector<Item*> stockShop();
+
+	// FIGHT FUNCTIONS
+	void loadNewEnemy();
 	
+	bool fight();
+
+	bool fightWin();
+
+	void fightLose();
+
+	bool runAway();
+
 	// some other functions
 	void badInput(string& ui); // bad input message and procedure
 	void clearScreen(); // clears screen

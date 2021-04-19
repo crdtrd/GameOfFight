@@ -7,5 +7,5 @@ int main() {
 	// cout << time(0);
 	Game g;
 	g.play();
-	return 0;
+ 	return 0;
 }

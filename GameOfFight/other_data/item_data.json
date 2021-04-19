@@ -1,0 +1,179 @@
+[
+  {
+    "tier": 1,
+    "armors": [
+      { "name": "Short Sleeve Shirt" },
+      { "name": "Long Sleeve Shirt" },
+      { "name": "Sweater" },
+      { "name": "Overalls" }
+    ],
+    "weapons": [
+      { "name": "Metal Knuckles" },
+      { "name": "Baseball Bat" },
+      { "name": "Painting" },
+      { "name": "Racket" },
+      { "name": "Shank" },
+      { "name": "Glass Bottle" },
+      { "name": "Rock" }
+    ]
+  },
+  {
+    "tier": 2,
+    "armors": [
+      { "name": "Jacket" },
+      { "name": "Pillows" },
+      { "name": "Trash Can" },
+      { "name": "Flex Tape" }
+    ],
+    "weapons": [
+      { "name": "Pepper Spray" },
+      { "name": "Flatulation" },
+      { "name": "Pitch Fork" },
+      { "name": "Sword Cane" },
+      { "name": "Wooden Plank" },
+      { "name": "Fire Extinguisher" },
+      { "name": "Nail Gun" }
+    ]
+  },
+  {
+    "tier": 3,
+    "armors": [
+      { "name": "Cow Hide" },
+      { "name": "Chainmail" },
+      { "name": "Morph Suit" },
+      { "name": "Bath Robe" }
+    ],
+    "weapons": [
+      { "name": "Pistol Cane" },
+      { "name": "Slingshot" },
+      { "name": "Hammer" },
+      { "name": "Axe" },
+      { "name": "Jukebox" },
+      { "name": "Jackhammer" }
+    ]
+  },
+  {
+    "tier": 4,
+    "armors": [
+      { "name": "Light Armor" },
+      { "name": "Memory Foam Pillows" },
+      { "name": "Wooden Shield" },
+      { "name": "Annoying Cloak" }
+    ],
+    "weapons": [
+      { "name": "Small Revolver" },
+      { "name": "Double Barrel Shotgun" },
+      { "name": ".22 Rifle" },
+      { "name": "Throwing Knife" },
+      { "name": "Axe Body Spray" },
+      { "name": "Molotov" }
+    ]
+  },
+  {
+    "tier": 5,
+    "armors": [
+      { "name": "Steel Shield" },
+      { "name": "Steel Armor" },
+      { "name": "Balistic Vest" },
+      { "name": "Thicc" }
+    ],
+    "weapons": [
+      { "name": "Words" },
+      { "name": "TI-69X Pro Graphing Calculator" },
+      { "name": "TI-420Z Pro Scientific Calculator" },
+      { "name": "Cult M1911B1" },
+      { "name": "Shirt Cannon" },
+      { "name": "Attack Dogo" }
+    ]
+  },
+  {
+    "tier": 6,
+    "armors": [
+      { "name": "Titanium Shield" },
+      { "name": "Power Suit" },
+      { "name": "Battle Suit" },
+      { "name": "Energy Shield" }
+    ],
+    "weapons": [
+      { "name": "Big Revolver" },
+      { "name": "Machette" },
+      { "name": "Compact Bow" },
+      { "name": "Matryoshka Dolls" },
+      { "name": "QED" },
+      { "name": "Arachnophobia" }
+    ]
+  },
+  {
+    "tier": 7,
+    "armors": [
+      { "name": "Beskar Plating" },
+      { "name": "Faceman's Face" },
+      { "name": "RTX On" },
+      { "name": "Sloped Tank Armor" }
+    ],
+    "weapons": [
+      { "name": "Very Hot Flower That Is On Fire" },
+      { "name": "Very Cold Flower That Is On Fire" },
+      { "name": "Scythe" },
+      { "name": "Magical Staff" },
+      { "name": "Even More Words" },
+      { "name": "Very Large Revolver" },
+      { "name": "RPG" }
+    ]
+  },
+  {
+    "tier": 8,
+    "armors": [
+      { "name": "Cram Shield" },
+      { "name": "Wizard Robes" },
+      { "name": "Invisible Cloak" },
+      { "name": "Reactive Tank Armor" },
+      { "name": "Burrito" }
+    ],
+    "weapons": [
+      { "name": "Vorpal Ballad" },
+      { "name": "Queen's Gambit" },
+      { "name": "5 Blunderbusses Duct Taped Together" },
+      { "name": "Diamond Sword" },
+      { "name": "Mace" },
+      { "name": "Science" },
+      { "name": "Pancakes" }
+    ]
+  },
+  {
+    "tier": 9,
+    "armors": [
+      { "name": "Flying Nimbus" },
+      { "name": "Iron Man Armor Model 1 MK II" },
+      { "name": "Batsuit" },
+      { "name": "Loader" }
+    ],
+    "weapons": [
+      { "name": "Waffles" },
+      { "name": "Balista Nuclear Identifier Missile Launcher" },
+      { "name": "Bag Of Beans" },
+      { "name": "Fire" },
+      { "name": "Shiny Magical Cube" },
+      { "name": ".50 Sniper Rifle" },
+      { "name": "Bow Of Lightning" }
+    ]
+  },
+  {
+    "tier": 10,
+    "armors": [
+      { "name": "Force Shield" },
+      { "name": "Electrically Charged Tank Armor" },
+      { "name": "Glorious Radiance" },
+      { "name": "CPU Pillow From lttstore.com" }
+    ],
+    "weapons": [
+      { "name": "Lightsaber" },
+      { "name": "Proton Pack" },
+      { "name": "Fireball" },
+      { "name": "200 IQ" },
+      { "name": "Diamond Axe" },
+      { "name": "Baguette" },
+      { "name": "Batarang" }
+    ]
+  }
+]

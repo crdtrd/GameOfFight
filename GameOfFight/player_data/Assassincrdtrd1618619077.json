@@ -1,34 +1,34 @@
 [
   {
     "armors": [],
-    "currentTopDef": 0,
-    "currentTopDmg": 0,
-    "damage": 0,
+    "currentTopDef": 14,
+    "currentTopDmg": 16,
+    "damage": 16,
     "defeats": 0,
-    "defense": 0,
+    "defense": 14,
     "equippedArmor": {
-      "defense": 0,
-      "name": "Shirt",
-      "worth": 0
+      "defense": 15,
+      "name": "Pillows",
+      "worth": 15
     },
     "equippedWeapon": {
-      "damage": 10,
-      "name": "Fist",
-      "worth": 0
+      "damage": 15,
+      "name": "Fire Extinguisher",
+      "worth": 15
     },
     "fileName": "Assassincrdtrd1618619077.json",
     "health": 100,
     "maxHealth": 100,
     "name": "crdtrd",
-    "powerLevel": 0,
+    "powerLevel": 30,
     "saveName": "Autosave",
     "saveSlot": "A",
-    "saveTime": 1618644838,
+    "saveTime": 1618789513,
     "title": "Assassin",
-    "titleDefMod": 0,
-    "titleDmgMod": 0,
+    "titleDefMod": -10,
+    "titleDmgMod": 10,
     "victories": 0,
-    "wallet": 0,
+    "wallet": 9980,
     "weapons": []
   },
   {

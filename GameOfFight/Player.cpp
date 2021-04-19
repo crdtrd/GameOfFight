@@ -17,6 +17,13 @@ Player::Player(int titleDmgMod, int titleDefMod, int powerLevel, int currentTopD
 	this->defeats = defeats;
 }
 
+void Player::updateStats()
+{
+	updateDamage(); updateDefense(); 
+	updateCurrentTopDef(); updateCurrentTopDmg(); 
+	updatePowerLevel();
+}
+
 void Player::setTitleDmgMod(int mod) 
 {
 	titleDmgMod = mod;
@@ -39,12 +46,12 @@ int Player::getTitleDefMod() const
 
 void Player::updateDamage()
 {
-	damage = (round(equippedWeapon.getDamage() + (equippedWeapon.getDamage() / double(titleDmgMod))));
+	damage = (static_cast<Weapon*>(equippedWeapon)->getDamage() + (round(static_cast<Weapon*>(equippedWeapon)->getDamage() / titleDmgMod)));
 }
 
 void Player::updateDefense()
 {
-	defense = (round(equippedArmor.getDefense() + (equippedArmor.getDefense() / double(titleDefMod))));
+	defense = (static_cast<Armor*>(equippedArmor)->getDefense() + (round(static_cast<Armor*>(equippedArmor)->getDefense() / titleDefMod)));
 }
 
 void Player::updatePowerLevel()
@@ -83,13 +90,9 @@ int Player::getCurrentTopDef() const
 	return currentTopDef;
 }
 
-int Player::getWallet() const
+void Player::payMoney(int money) // need to adjust to prevent silliness
 {
-	return wallet;
-}
-
-void Player::payMoney(int money)
-{
+	wallet -= money;
 	return;
 }
 
@@ -128,6 +131,31 @@ void Player::addDefeat()
 	defeats++;
 }
 
+void Character::setWallet(int money)
+{
+
+}
+
+int Character::getWallet() const
+{
+	return wallet;
+}
+
+string Player::toString()
+{
+	string s = name
+		+ "\nPower Level: " + to_string(powerLevel)
+		+ "\nClass: " + title
+		+ "\nWallet: $" + to_string(wallet)
+		+ "\nHP: " + to_string(health)
+		+ equippedWeapon->getName() + ": " + to_string(static_cast<Weapon*>(equippedWeapon)->getDamage()) + " damage\n"
+		+ equippedArmor->getName() + ": " + to_string(static_cast<Armor*>(equippedArmor)->getDefense()) + " defense\n"
+		+ "\nMax HP: " + to_string(maxHealth)
+		+ "\nVictories: " + to_string(victories)
+		+ "\nDefeats: " + to_string(defeats) + "\n";
+	return s;
+}
+
 // deep copy via operator =
 const Player& Player::operator=(const Player& p)
 {
@@ -145,8 +173,15 @@ const Player& Player::operator=(const Player& p)
 	wallet = p.wallet;
 	name = p.name;
 	title = p.title;
+	for (int i = 0; i < items.size(); i++) // clean it up proper
+	{
+		delete items[i];
+	}
+	items.clear();
 	items = p.items;
+	delete equippedWeapon;
 	equippedWeapon = p.equippedWeapon; 
+	delete equippedArmor;
 	equippedArmor = p.equippedArmor;
 	return *this;
 }

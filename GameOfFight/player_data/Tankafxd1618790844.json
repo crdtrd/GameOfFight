@@ -1,0 +1,34 @@
+[
+  {
+    "armors": [],
+    "currentTopDef": 0,
+    "currentTopDmg": 9,
+    "damage": 9,
+    "defeats": 0,
+    "defense": 0,
+    "equippedArmor": {
+      "defense": 0,
+      "name": "Shirt",
+      "worth": 0
+    },
+    "equippedWeapon": {
+      "damage": 10,
+      "name": "Fist",
+      "worth": 0
+    },
+    "fileName": "Tankafxd1618790844.json",
+    "health": 100,
+    "maxHealth": 100,
+    "name": "afxd",
+    "powerLevel": 9,
+    "saveName": "Autosave",
+    "saveSlot": "A",
+    "saveTime": 1618790944,
+    "title": "Tank",
+    "titleDefMod": 10,
+    "titleDmgMod": -10,
+    "victories": 0,
+    "wallet": 0,
+    "weapons": []
+  }
+]

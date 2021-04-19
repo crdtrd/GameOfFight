@@ -15,20 +15,10 @@ Enemy::Enemy(int health, int maxHealth, int damage, int defense, int wallet,
 
 void Enemy::updateDamage()
 {
-
+	damage = static_cast<Weapon*>(equippedWeapon)->getDamage();
 }
 
 void Enemy::updateDefense()
 {
-
-}
-
-void Enemy::updateWallet()
-{
-
-}
-
-void Enemy::payMoney(Player& p)
-{
-
+	damage = static_cast<Armor*>(equippedArmor)->getDefense();
 }

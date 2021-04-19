@@ -1,0 +1,34 @@
+[
+  {
+    "armors": [],
+    "currentTopDef": 0,
+    "currentTopDmg": 0,
+    "damage": 0,
+    "defeats": 0,
+    "defense": 0,
+    "equippedArmor": {
+      "defense": 0,
+      "name": "Shirt",
+      "worth": 0
+    },
+    "equippedWeapon": {
+      "damage": 10,
+      "name": "Fist",
+      "worth": 0
+    },
+    "fileName": "Fighterdassda1618787985.json",
+    "health": 100,
+    "maxHealth": 100,
+    "name": "dassda",
+    "powerLevel": 0,
+    "saveName": "Autosave",
+    "saveSlot": "A",
+    "saveTime": 1618787985,
+    "title": "Fighter",
+    "titleDefMod": 100000,
+    "titleDmgMod": 100000,
+    "victories": 0,
+    "wallet": 0,
+    "weapons": []
+  }
+]
