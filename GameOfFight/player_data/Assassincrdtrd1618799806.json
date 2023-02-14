@@ -1,66 +1,78 @@
 [
   {
-    "armors": [],
-    "currentTopDef": 0,
+    "armors": [
+      {
+        "defense": 0,
+        "name": "Shirt",
+        "worth": 0
+      }
+    ],
+    "currentTopDef": 9,
     "currentTopDmg": 11,
     "damage": 11,
     "defeats": 0,
-    "defense": 0,
+    "defense": 9,
     "equippedArmor": {
-      "defense": 0,
-      "name": "Shirt",
-      "worth": 0
+      "defense": 10,
+      "name": "Long Sleeve Shirt",
+      "worth": 10
     },
     "equippedWeapon": {
       "damage": 10,
-      "name": "Fist",
-      "worth": 0
+      "name": "Glass Bottle",
+      "worth": 10
     },
     "fileName": "Assassincrdtrd1618799806.json",
-    "health": 60,
+    "health": 20,
     "maxHealth": 100,
     "name": "crdtrd",
-    "powerLevel": 11,
+    "powerLevel": 20,
     "saveName": "Autosave",
     "saveSlot": "A",
-    "saveTime": 1618805528,
+    "saveTime": 1676415810,
     "title": "Assassin",
     "titleDefMod": -10,
     "titleDmgMod": 10,
     "victories": 0,
-    "wallet": 37,
+    "wallet": 31,
     "weapons": []
   },
   {
-    "armors": [],
-    "currentTopDef": 0,
+    "armors": [
+      {
+        "defense": 0,
+        "name": "Shirt",
+        "worth": 0
+      }
+    ],
+    "currentTopDef": 9,
     "currentTopDmg": 11,
     "damage": 11,
     "defeats": 0,
-    "defense": 0,
+    "defense": 9,
     "equippedArmor": {
-      "defense": 0,
-      "name": "Shirt",
-      "worth": 0
+      "defense": 10,
+      "name": "Long Sleeve Shirt",
+      "worth": 10
     },
     "equippedWeapon": {
       "damage": 10,
-      "name": "Fist",
-      "worth": 0
+      "name": "Glass Bottle",
+      "worth": 10
     },
     "fileName": "Assassincrdtrd1618799806.json",
     "health": 100,
     "maxHealth": 100,
     "name": "crdtrd",
-    "powerLevel": 11,
+    "powerLevel": 20,
     "saveName": "b",
     "saveSlot": "B",
-    "saveTime": 1618799875,
+    "saveTime": 1676415825,
     "title": "Assassin",
     "titleDefMod": -10,
     "titleDmgMod": 10,
     "victories": 0,
-    "wallet": 0,
+    "wallet": 31,
     "weapons": []
   },
   {
